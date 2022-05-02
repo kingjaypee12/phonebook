@@ -55,6 +55,10 @@ function onDelete (id) {
 function onSearch() {
   search.get(route('phone.index'))
 }
+
+function resetFilter() {
+  Inertia.get(route('phone.index'))
+}
 </script>
 
 <template>
@@ -67,8 +71,9 @@ function onSearch() {
       <label for="mobile">Mobile:</label>
       <input type="text" v-model="search.mobile" @change="onSearch">
     </div>
-    <div class="w-1/4 button flex flex-col justify-end">
-      <button class="px-3 py-2 capitalize bg-green-600 text-white" @click="modalToggle = true">Import CSV</button>
+    <div class="w-1/2 button flex align-end gap-2 pt-5">
+      <button @click="resetFilter" class="px-5 py-2 capitalize bg-blue-600 text-white">Reset Filter</button>
+      <button @click="modalToggle = true" class="px-5 py-2 capitalize bg-green-600 text-white">Import CSV</button>
     </div>
   </div>
   <div>

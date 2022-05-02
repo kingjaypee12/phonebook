@@ -18,10 +18,12 @@ class PhoneController extends Controller
         $phones = Phone::all();
 
         if ($request->hasAny(['name', 'mobile'])) {
-            $phones = Phone::where('firstname', $request->name)
-                ->orWhere('lastname', $request->name)
-                ->orWhere('mobile', $request->mobile)
-                ->get();
+            if ($request->filled('name') || $request->filled('mobile')) {
+                $phones = Phone::where('firstname', $request->name)
+                    ->orWhere('lastname', $request->name)
+                    ->orWhere('mobile', $request->mobile)
+                    ->get();
+            }
         }
 
         return Inertia::render('Home', ['phones' => $phones]);
